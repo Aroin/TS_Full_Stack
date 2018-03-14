@@ -1,0 +1,9 @@
+{
+  "NOT_FOUND_PAGE": {
+    "msg" : "404 Not Found!",
+    "oops": "Oops!",
+    "deatils": "Sorry, an error has occured, Requested page not found!",
+    "take_home": "Take Me Home",
+    "contact_support": "Contact Support"
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "PUBLIC": {
+        "dashboard": "Dashboard",
+        "login": "Login",
+        "register": "Register",
+        "title": "Your Website",
+        "copyright": "Copyright"
+    }
+}
