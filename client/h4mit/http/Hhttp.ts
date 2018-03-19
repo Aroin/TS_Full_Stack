@@ -1,9 +1,9 @@
 import {
   Http, ConnectionBackend, RequestOptions, RequestOptionsArgs, Response, Request, Headers,
   XHRBackend
-} from "@angular/http";
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+} from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 /**
  * Created by h4mit on 26/08/2017.
  */
@@ -11,36 +11,36 @@ import {Observable} from "rxjs";
 @Injectable()
 export class Hhttp extends Http {
 
-  constructor(backend:ConnectionBackend, defaultOption:RequestOptions) {
+  constructor(backend: ConnectionBackend, defaultOption: RequestOptions) {
     super(backend, defaultOption);
   }
 
-  request(url:string | Request, options?:RequestOptionsArgs):Observable<Response> {
+  request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
 
     return this.intercept(super.request(url, options));
   }
 
-  get(url:string, options?:RequestOptionsArgs):Observable<Response> {
+  get(url: string, options?: RequestOptionsArgs): Observable<Response> {
     // window.document.getElementById('loading').innerHTML = "<h1> Loading ... </h1>";
-    let response = this.intercept(super.get(url, options));
-    //window.document.getElementById('loading').innerHTML = "";
+    const response = this.intercept(super.get(url, options));
+    // window.document.getElementById('loading').innerHTML = "";
     return response;
   }
 
-  post(url:string, body:string, options?:RequestOptionsArgs):Observable<Response> {
+  post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(super.post(url, body, this.getRequestOptionArgs(options)));
   }
 
-  put(url:string, body:string, options?:RequestOptionsArgs):Observable<Response> {
+  put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(super.put(url, body, this.getRequestOptionArgs(options)));
   }
 
-  delete(url:string, options?:RequestOptionsArgs):Observable<Response> {
+  delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
 
     return this.intercept(super.delete(url, this.getRequestOptionArgs(options)));
   }
 
-  getRequestOptionArgs(options?:RequestOptionsArgs):RequestOptionsArgs {
+  getRequestOptionArgs(options?: RequestOptionsArgs): RequestOptionsArgs {
     if (options == null) {
       options = new RequestOptions();
     }
@@ -51,7 +51,7 @@ export class Hhttp extends Http {
     return options;
   }
 
-  intercept(observable: Observable<Response>):Observable<Response> {
+  intercept(observable: Observable<Response>): Observable<Response> {
     // console.log('Loading...');
     return observable.catch((err, source) => {
       if (err.status == 401) {
@@ -63,12 +63,12 @@ export class Hhttp extends Http {
   }
 }
 
-export var HhttpProvider = {
+export let HhttpProvider = {
   provide: Http,
   useFactory: HhttpFactory,
   deps: [XHRBackend, RequestOptions]
 };
 
-export function  HhttpFactory(backend:XHRBackend, requestOptions:RequestOptions){
+export function  HhttpFactory(backend: XHRBackend, requestOptions: RequestOptions) {
   return new Hhttp(backend, requestOptions);
 }
